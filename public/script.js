@@ -32,6 +32,19 @@ navigator.mediaDevices
     socket.on("user-connected", (userId) => {
       connetToNewUser(userId, stream);
     });
+
+    let text = $('input')
+    $('html').keydown((e)=>{
+        if(e.which == 13 && text.val().length !== 0){
+            socket.emit('message', text.val());
+            // console.log(text.val());
+            text.val('');
+        }
+    })
+    socket.on('createMessage',message => {
+        $('ul').append(`<li class="message"><b>user</b><br/>${message}</li>`)
+        scrollToBottom();
+    })
   });
 peer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id);
@@ -55,3 +68,31 @@ const addVideoStream = (video, stream) => {
   });
   videoGrid.append(video);
 };
+
+const scrollToBottom = () => {
+    let d = $('.main__chat__window');
+    d.scrollTop(d.prop("scrollHeight"))
+}
+
+//** Mute and unmute our video 
+const muteUnmute = () => {
+    const enabled = myVideoStream.getAudioTracks()[0].enabled;
+    if(enabled) {
+        myVideoStream.getAudioTracks()[0].enabled = false;
+        setUnmuteButton();
+    }else {
+        setMuteButton();
+        myvideoStream.getAudioTracks()[0].enabled = true;
+    }
+}
+
+const setMuteButton = () => {
+    const html = `<i class="fas fa-microphone"></i><span>Mute</span>`
+    document.querySelector('.main__mute_button').innerHTML = html;
+}
+const setUnmuteButton = () => {
+    const html = `<i class="unmute fas fa-microphone-slash"></i><span>Unmute</span>`
+    document.querySelector('.main__mute_button').innerHTML = html;
+}
+
+
