@@ -38,6 +38,7 @@ video {
     background-color: #1C1E20;
     color: #D2D2D2;
     padding: 5px;
+    justify-content: space-between;
 }
 .main__controls__block { 
     display: flex;
@@ -50,4 +51,54 @@ video {
     padding: 8px 10px;
     min-width: 80px;
     cursor: pointer;
+}
+
+.main__controls__button i {
+    font-size: 24px;
+}
+
+.main__controls__button:hover{
+    background-color: #343434;
+    border-radius: 30px;
+}
+
+.leave_meeting {
+ color: #EB534B
+}
+
+.main__right {
+    display: flex;
+    flex-direction: column;
+    background-color: #242324;
+    border-left: 1px solid #3D3D42;
+}
+.main__header {
+    color: #F5F5F5 ;
+    text-align: center;
+}
+
+.main__chat__window{
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+.main__message_container {
+    padding : 22px 12px;
+    display: flex;
+
+}
+
+.main__message_container input {
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    color: #F5F5F5;
+}
+
+.messages {
+    color: white;
+    list-style: none;
+}
+
+.unmute {
+    color: #CC3B33
 }
