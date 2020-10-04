@@ -31,6 +31,8 @@ navigator.mediaDevices
 
     socket.on("user-connected", (userId) => {
       connetToNewUser(userId, stream);
+
+      
     });
 
     let text = $('input')
@@ -83,6 +85,8 @@ const muteUnmute = () => {
     }else {
         setMuteButton();
         myvideoStream.getAudioTracks()[0].enabled = true;
+        // console.log(myVideoStream);
+
     }
 }
 
@@ -93,6 +97,29 @@ const setMuteButton = () => {
 const setUnmuteButton = () => {
     const html = `<i class="unmute fas fa-microphone-slash"></i><span>Unmute</span>`
     document.querySelector('.main__mute_button').innerHTML = html;
+}
+
+const playStop = () => {
+    // console.log('object');
+    let enabled = myVideoStream.getVideoTracks()[0].enabled;
+    if (enabled) {
+        myVideoStream.getVideoTracks()[0].enabled = false;
+        setPlayVideo();
+    }else{
+        setStopVideo();
+        myvideoStream.getVideoTracks()[0].enabled = true;
+        // console.log(myVideoStream);
+
+    }
+}
+
+const setPlayVideo = () => {
+    const html = `<i class="stop fas fa-video-slash"></i><span>Play Video</span>`
+    document.querySelector('.main__video_button').innerHTML = html;
+}
+const setStopVideo = () => {
+    const html = `<i class="fas fa-video"></i><span>Stop Video</span>`
+    document.querySelector('.main__video_button').innerHTML = html;
 }
 
 
